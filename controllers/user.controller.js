@@ -5,13 +5,13 @@ const { admin } = require('../config/firebase'); // Import admin from firebase.j
 
 // Your Firebase configuration (if needed for client-side SDK)
 const firebaseConfig = {
-    apiKey: "Your-API-Key",
-    authDomain: "Your-Auth-Domain",
-    projectId: "Your-Project-ID",
-    storageBucket: "Your-Storage-Bucket",
-    messagingSenderId: "Your-Messaging-Sender-ID",
-    appId: "Your-App-ID",
-    measurementId: "Your-Measurement-ID"
+    apiKey: "AIzaSyDQTI06iZgNrPB_DLx4zoa1SPwVEl1Zj-c",
+    authDomain: "lens-food-project.firebaseapp.com",
+    projectId: "lens-food-project",
+    storageBucket: "lens-food-project.appspot.com",
+    messagingSenderId: "628521274677",
+    appId: "1:628521274677:web:5d274e2099b629b08ed07c",
+    measurementId: "G-7878KLB0E7"
 };
 
 // Initialize Firebase client-side SDK (if needed)
@@ -88,6 +88,7 @@ exports.loginUser = (req, res) => {
     });
 };
 
+// Reset password
 exports.resetPassword = (req, res) => {
     const { email } = req.body;
     if (!email) {
@@ -103,6 +104,7 @@ exports.resetPassword = (req, res) => {
     });
 };
 
+// Logout
 exports.logoutProfile = async (req, res) => {
     const idToken = req.headers.authorization?.split('Bearer ')[1];
 
@@ -118,6 +120,7 @@ exports.logoutProfile = async (req, res) => {
     }
 };
 
+// Update profile
 exports.updateProfile = async (req, res) => {
     const { getAuth } = require('firebase-admin/auth');
 
@@ -151,15 +154,3 @@ exports.updateProfile = async (req, res) => {
         res.status(500).send({ message: error.message });
     }
 };
-// Get User Profile
-// exports.getUserProfile = (req, res) => {
-//     const user = req.user;
-//     res.status(200).send({
-//         message: "User profile retrieved successfully",
-//         userId: user.uid,
-//         displayName: user.displayName,
-//         email: user.email,
-//         height: user.height,
-//         weight: user.weight
-//     });
-//};

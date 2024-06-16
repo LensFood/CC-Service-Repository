@@ -3,12 +3,13 @@ const users = require('../controllers/user.controller');
 const verifyToken = require('../middleware/authMiddleware');
 const router = express.Router();
 
-// Route to logout user
-router.post('/logout', verifyToken, users.logoutProfile);
-
-// Register and login routes
+// Route to user register
 router.post('/register', users.registUser);
+
+// Route to user login
 router.post('/login', users.loginUser);
+
+// Route to reset password
 router.post('/reset-password', users.resetPassword);
 
 // Route to update user profile
@@ -24,5 +25,8 @@ router.get('/profile', verifyToken, async (req, res) => {
         res.status(500).send({ message: 'Error fetching user profile.' });
     }
 });
+
+// Route to logout user
+router.post('/logout', verifyToken, users.logoutProfile);
 
 module.exports = router;

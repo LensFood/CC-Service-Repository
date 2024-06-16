@@ -1,0 +1,5 @@
+/node_modules
+.env
+package-lock.json
+lens-food-project-24aa998350a1.json
+serviceAccountKey.json
