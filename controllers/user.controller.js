@@ -88,7 +88,6 @@ exports.loginUser = (req, res) => {
     });
 };
 
-// Reset password
 exports.resetPassword = (req, res) => {
     const { email } = req.body;
     if (!email) {
@@ -104,7 +103,6 @@ exports.resetPassword = (req, res) => {
     });
 };
 
-// Logout
 exports.logoutProfile = async (req, res) => {
     const idToken = req.headers.authorization?.split('Bearer ')[1];
 
@@ -120,7 +118,6 @@ exports.logoutProfile = async (req, res) => {
     }
 };
 
-// Update profile
 exports.updateProfile = async (req, res) => {
     const { getAuth } = require('firebase-admin/auth');
 
@@ -154,3 +151,15 @@ exports.updateProfile = async (req, res) => {
         res.status(500).send({ message: error.message });
     }
 };
+// Get User Profile
+// exports.getUserProfile = (req, res) => {
+//     const user = req.user;
+//     res.status(200).send({
+//         message: "User profile retrieved successfully",
+//         userId: user.uid,
+//         displayName: user.displayName,
+//         email: user.email,
+//         height: user.height,
+//         weight: user.weight
+//     });
+//};
