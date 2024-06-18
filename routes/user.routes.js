@@ -2,20 +2,22 @@ const express = require('express');
 const users = require('../controllers/user.controller');
 const verifyToken = require('../middleware/authMiddleware');
 const router = express.Router();
+const admin = require('firebase-admin');
+const { saveRecommendedFoods, getRecommendedFoods, saveRecommendedExercises, getRecommendedExercises } = require('../controllers/SaveRekomend');
 
-// Route to user register
+// Route untuk user register
 router.post('/register', users.registUser);
 
-// Route to user login
+// Route untuk user login
 router.post('/login', users.loginUser);
 
-// Route to reset password
+// Route untuk reset password
 router.post('/reset-password', users.resetPassword);
 
-// Route to update user profile
+// Route untuk update user profile
 router.put('/profile', verifyToken, users.updateProfile);
 
-// Route to get user profile
+// Route untuk mendapatkan user profile
 router.get('/profile', verifyToken, async (req, res) => {
     try {
         const userRecord = await admin.auth().getUser(req.uid);
@@ -26,7 +28,19 @@ router.get('/profile', verifyToken, async (req, res) => {
     }
 });
 
-// Route to logout user
+// Route untuk logout user
 router.post('/logout', verifyToken, users.logoutProfile);
+
+// Route untuk menyimpan makanan yang direkomendasikan
+router.post('/save-recommended-foods', verifyToken, saveRecommendedFoods);
+
+// Route untuk mendapatkan makanan yang direkomendasikan
+router.get('/get-recommended-foods', verifyToken, getRecommendedFoods);
+
+// Route untuk menyimpan olahraga yang direkomendasikan
+router.post('/save-recommended-exercises', verifyToken, saveRecommendedExercises);
+
+// Route untuk mendapatkan olahraga yang direkomendasikan
+router.get('/get-recommended-exercises', verifyToken, getRecommendedExercises);
 
 module.exports = router;
